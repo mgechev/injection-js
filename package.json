@@ -22,7 +22,7 @@
     "reflect-metadata": "^0.1.9"
   },
   "scripts": {
-    "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && cp package.json dist && ts-node -P tsconfig-ts-node.json tools/cleanup.ts",
+    "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && cp package.json dist && ts-node -P tsconfig-ts-node.json tools/cleanup.ts && cp README.md dist",
     "build:test": "rimraf dist-test && tsc -p tsconfig-test.json",
     "test": "jasmine"
   },
@@ -30,6 +30,7 @@
     "DI",
     "dependency",
     "injection",
+    "dependency injection",
     "injector"
   ],
   "author": "Minko Gechev <mgechev@gmail.com>",

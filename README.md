@@ -4,6 +4,10 @@ Extraction of the Angular's Dependency Injection which allows you to use it outs
 
 # How to use?
 
+```
+$ npm i injection-js
+```
+
 ## TypeScript
 
 ```ts

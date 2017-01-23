@@ -1,6 +1,6 @@
 # Dependency Injection
 
-Fork of the Angular's dependency injection. This library can be used outside the framework.
+Extraction of the Angular's Dependency Injection which allows you to use it outside of the framework.
 
 # How to use?
 

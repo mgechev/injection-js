@@ -1,16 +1,17 @@
 require('reflect-metadata');
-const di = require('../dist');
+var di = require('../dist/injection.bundle');
 
-const Http = di.Class({
+var Http = di.Class({
   constructor: function () {}
 });
 
-const Service = di.Class({
+var Service = di.Class({
   constructor: [Http, function (http) {
     this.http = http;
   }]
 });
 
-const injector = di.ReflectiveInjector.resolveAndCreate([Http, Service]);
+var injector = di.ReflectiveInjector.resolveAndCreate([Http, Service]);
 
 console.log(injector.get(Service) instanceof Service);
+

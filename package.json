@@ -2,12 +2,18 @@
   "name": "injection-js",
   "version": "1.0.0",
   "description": "Dependency Injection library for JavaScript and TypeScript",
-  "main": "index.js",
+  "main": "injection.bundle.js",
+  "module": "index.js",
+  "jsnext:main": "index.js",
+  "types": "index.d.ts",
   "dependencies": {},
   "devDependencies": {
     "@types/jasmine": "^2.5.41",
+    "@types/node": "^7.0.2",
     "jasmine": "^2.5.3",
     "reflect-metadata": "^0.1.9",
+    "rimraf": "^2.5.4",
+    "rollup": "^0.41.4",
     "ts-node": "^2.0.0",
     "tslint": "^4.3.1",
     "typescript": "~2.0.0"
@@ -16,8 +22,8 @@
     "reflect-metadata": "^0.1.9"
   },
   "scripts": {
-    "build": "tsc",
-    "build:test": "tsc -p tsconfig-test.json",
+    "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && cp package.json dist && ts-node -P tsconfig-ts-node.json tools/cleanup.ts",
+    "build:test": "rimraf dist-test && tsc -p tsconfig-test.json",
     "test": "jasmine"
   },
   "keywords": [

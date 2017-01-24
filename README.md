@@ -1,6 +1,6 @@
 # Dependency Injection
 
-Extraction of the Angular's Dependency Injection which allows you to use it outside of the framework.
+Dependency injection library for JavaScript and TypeScript in **6.6K**. It is extraction of the Angular's dependency injection which means that it's feature complete, reliable and well tested.
 
 # How to use?
 

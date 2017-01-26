@@ -33,7 +33,7 @@ injector.get(Service);
 
 ```js
 require('reflect-metadata');
-var di = require('../dist');
+var di = require('injection-js');
 
 var Http = di.Class({
   constructor: function () {}
@@ -46,6 +46,28 @@ var Service = di.Class({
 });
 
 var injector = di.ReflectiveInjector.resolveAndCreate([Http, Service]);
+
+console.log(injector.get(Service) instanceof Service);
+```
+
+## ES6
+
+```js
+const { Inject, ReflectiveInjector } = require('injection-js');
+
+class Http {}
+
+class Service {
+  static get parameters() {
+    return [[new Inject(Http)]];
+  }
+
+  constructor(http) {
+    this.http = http;
+  }
+}
+
+const injector = ReflectiveInjector.resolveAndCreate([Http, Service]);
 
 console.log(injector.get(Service) instanceof Service);
 ```

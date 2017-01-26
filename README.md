@@ -26,7 +26,7 @@ const injector = ReflectiveInjector.resolveAndCreate({
   Http
 });
 
-injector.get(Service);
+console.log(injector.get(Service) instanceof Service);
 ```
 
 ## ES5

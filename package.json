@@ -1,6 +1,6 @@
 {
   "name": "injection-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Dependency Injection library for JavaScript and TypeScript",
   "main": "injection.bundle.js",
   "module": "index.js",
@@ -17,9 +17,6 @@
     "ts-node": "^2.0.0",
     "tslint": "^4.3.1",
     "typescript": "~2.0.0"
-  },
-  "peerDependencies": {
-    "reflect-metadata": "^0.1.9"
   },
   "scripts": {
     "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && cp package.json dist && ts-node -P tsconfig-ts-node.json tools/cleanup.ts && cp README.md dist",

@@ -5,8 +5,10 @@ Dependency injection library for JavaScript and TypeScript in **6.6K**. It is ex
 # How to use?
 
 ```
-$ npm i injection-js
+$ npm i injection-js --save
 ```
+
+Note that for ES5 `Class` syntax and TypeScript you need a polyfill for the [Reflect API](http://www.ecma-international.org/ecma-262/6.0/#sec-reflect-object). You can use, for instance, [reflect-metadata](https://www.npmjs.com/package/reflect-metadata), or [`core-js` (`core-js/es7/reflect`)](https://www.npmjs.com/package/core-js).
 
 ## TypeScript
 

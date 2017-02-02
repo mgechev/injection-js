@@ -1,0 +1,13 @@
+language: node_js
+node_js: stable
+
+sudo: false
+
+install: true
+
+os:
+  - linux
+
+before_script:
+  - npm install && npm run build:test
+

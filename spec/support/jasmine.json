@@ -2,8 +2,5 @@
   "spec_dir": "dist-test",
   "spec_files": [
     "**/*_spec.js"
-  ],
-  "helpers": [
-    "helpers/**/*.js"
   ]
 }

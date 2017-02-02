@@ -1,6 +1,8 @@
+[![Build Status](https://travis-ci.org/mgechev/injection-js.svg?branch=master)](https://travis-ci.org/mgechev/injection-js)
+
 # Dependency Injection
 
-Dependency injection library for JavaScript and TypeScript in **6.6K**. It is extraction of the Angular's dependency injection which means that it's feature complete, reliable and well tested.
+Dependency injection library for JavaScript and TypeScript in **6.6K**. It is an extraction of the Angular's dependency injection which means that it's feature complete, fast, reliable and well tested.
 
 # How to use?
 
@@ -23,10 +25,32 @@ class Service {
   constructor(private http: Http) {}
 }
 
-const injector = ReflectiveInjector.resolveAndCreate({
+const injector = ReflectiveInjector.resolveAndCreate([
   Service,
   Http
-});
+]);
+
+console.log(injector.get(Service) instanceof Service);
+```
+
+## ES6
+
+```js
+const { Inject, ReflectiveInjector } = require('injection-js');
+
+class Http {}
+
+class Service {
+  static get parameters() {
+    return [new Inject(Http)];
+  }
+
+  constructor(http) {
+    this.http = http;
+  }
+}
+
+const injector = ReflectiveInjector.resolveAndCreate([Http, Service]);
 
 console.log(injector.get(Service) instanceof Service);
 ```
@@ -48,28 +72,6 @@ var Service = di.Class({
 });
 
 var injector = di.ReflectiveInjector.resolveAndCreate([Http, Service]);
-
-console.log(injector.get(Service) instanceof Service);
-```
-
-## ES6
-
-```js
-const { Inject, ReflectiveInjector } = require('injection-js');
-
-class Http {}
-
-class Service {
-  static get parameters() {
-    return [[new Inject(Http)]];
-  }
-
-  constructor(http) {
-    this.http = http;
-  }
-}
-
-const injector = ReflectiveInjector.resolveAndCreate([Http, Service]);
 
 console.log(injector.get(Service) instanceof Service);
 ```

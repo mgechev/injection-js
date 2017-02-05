@@ -76,7 +76,7 @@ var injector = di.ReflectiveInjector.resolveAndCreate([Http, Service]);
 console.log(injector.get(Service) instanceof Service);
 ```
 
-For full documentation click [here](https://angular.io/docs/ts/latest/guide/dependency-injection.html).
+For full documentation click [here](https://angular.io/docs/ts/latest/guide/dependency-injection.html), [here](https://angular.io/docs/ts/latest/cookbook/dependency-injection.html) and [here](https://angular.io/docs/ts/latest/cookbook/ts-to-js.html#!#dependency-injection).
 
 # License
 

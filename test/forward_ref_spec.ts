@@ -7,7 +7,7 @@
  */
 
 import {Type} from '../lib/facade/type';
-import {forwardRef, resolveForwardRef} from '../lib/index';
+import {forwardRef, resolveForwardRef} from '../lib';
 
 describe('forwardRef', function() {
   it('should wrap and unwrap the reference', () => {
@@ -16,4 +16,3 @@ describe('forwardRef', function() {
     expect(resolveForwardRef(ref)).toBe(String);
   });
 });
-

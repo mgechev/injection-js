@@ -6,46 +6,28 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
+export const ERROR_TYPE = 'ngType';
+export const ERROR_COMPONENT_TYPE = 'ngComponentType';
+export const ERROR_DEBUG_CONTEXT = 'ngDebugContext';
+export const ERROR_ORIGINAL_ERROR = 'ngOriginalError';
 
-/**
- * @stable
- */
-export class BaseError extends Error {
-  /** @internal **/
-  _nativeError: Error;
 
-  constructor(message: string) {
-    super(message);
-    // Errors don't use current this, instead they create a new instance.
-    // We have to do forward all of our api to the nativeInstance.
-    // TODO(bradfordcsmith): Remove this hack when
-    //     google/closure-compiler/issues/2102 is fixed.
-    const nativeError = new Error(message) as any as Error;
-    this._nativeError = nativeError;
-  }
-
-  get message() { return this._nativeError.message; }
-  set message(message) { this._nativeError.message = message; }
-  get name() { return this._nativeError.name; }
-  get stack() { return (this._nativeError as any).stack; }
-  set stack(value) { (this._nativeError as any).stack = value; }
-  toString() { return this._nativeError.toString(); }
+export function getType(error: Error): Function {
+  return (error as any)[ERROR_TYPE];
 }
 
-/**
- * @stable
- */
-export class WrappedError extends BaseError {
-  originalError: any;
-
-  constructor(message: string, error: any) {
-    super(`${message} caused by: ${error instanceof Error ? error.message: error }`);
-    this.originalError = error;
-  }
-
-  get stack() {
-    return ((this.originalError instanceof Error ? this.originalError : this._nativeError) as any)
-        .stack;
-  }
+export function getDebugContext(error: Error) {
+  return (error as any)[ERROR_DEBUG_CONTEXT];
 }
 
+export function getOriginalError(error: Error): Error {
+  return (error as any)[ERROR_ORIGINAL_ERROR];
+}
+
+export function wrappedError(message: string, originalError: any): Error {
+  const msg =
+      `${message} caused by: ${originalError instanceof Error ? originalError.message: originalError }`;
+  const error = Error(msg);
+  (error as any)[ERROR_ORIGINAL_ERROR] = originalError;
+  return error;
+}

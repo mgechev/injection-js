@@ -25,7 +25,7 @@
   "scripts": {
     "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && cp package.json dist && ts-node -P tsconfig-ts-node.json tools/cleanup.ts && cp README.md dist",
     "build:test": "rimraf dist-test && tsc -p tsconfig-test.json",
-    "test": "jasmine"
+    "test": "npm run build:test && jasmine"
   },
   "keywords": [
     "DI",

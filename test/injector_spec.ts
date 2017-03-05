@@ -6,7 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Injector} from '../lib/index';
+
+import {Injector} from '../lib';
 
 describe('Injector.NULL', () => {
   it('should throw if no arg is given', () => {
@@ -19,6 +20,5 @@ describe('Injector.NULL', () => {
   });
 
   it('should return the default value',
-     () => { expect(Injector.NULL.get('someToken', 'notFound')).toEqual('notFound'); });
+      () => { expect(Injector.NULL.get('someToken', 'notFound')).toEqual('notFound'); });
 });
-

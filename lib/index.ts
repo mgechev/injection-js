@@ -1,4 +1,3 @@
-
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -23,5 +22,3 @@ export {Provider, TypeProvider, ValueProvider, ClassProvider, ExistingProvider, 
 export {ResolvedReflectiveFactory, ResolvedReflectiveProvider} from './reflective_provider';
 export {ReflectiveKey} from './reflective_key';
 export {InjectionToken, OpaqueToken} from './injection_token';
-export {Class} from './util/decorators';
-

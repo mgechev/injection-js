@@ -20,7 +20,7 @@
     "rollup": "^0.41.4",
     "ts-node": "^2.0.0",
     "tslint": "^4.3.1",
-    "typescript": "~2.0.0"
+    "typescript": "^2.0.0"
   },
   "scripts": {
     "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && cp package.json dist && ts-node -P tsconfig-ts-node.json tools/cleanup.ts && cp README.md dist",

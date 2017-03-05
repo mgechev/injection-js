@@ -9,5 +9,5 @@ os:
   - linux
 
 before_script:
-  - npm install && npm run build:test
+  - npm install
 

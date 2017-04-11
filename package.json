@@ -1,6 +1,6 @@
 {
   "name": "injection-js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Dependency Injection library for JavaScript and TypeScript",
   "main": "injection.bundle.js",
   "module": "index.js",

@@ -10,14 +10,14 @@ import {global, stringify} from '../facade/lang';
 import {Type} from '../facade/type';
 
 let _nextClassId = 0;
-const Reflect = global.Reflect;
+const Reflect = global['Reflect'];
 
 /**
  * Declares the interface to be used with {@link Class}.
  *
  * @stable
  */
-export interface ClassDefinition {
+export type ClassDefinition = {
   /**
    * Optional argument for specifying the superclass.
    */
@@ -32,14 +32,15 @@ export interface ClassDefinition {
    *
    * See {@link Class} for example of usage.
    */
-  constructor: Function|any[];
-
+  constructor: Function | any[];
+} &
+{
   /**
    * Other methods on the class. Note that values should have type 'Function' but TS requires
    * all properties to have a narrower type than the index signature.
    */
   [x: string]: Type<any>|Function|any[];
-}
+};
 
 /**
  * An interface implemented by all Angular type decorators, which allows them to be used as ES7
@@ -95,7 +96,7 @@ function extractAnnotation(annotation: any): any {
   return annotation;
 }
 
-function applyParams(fnOrArray: (Function | any[]), key: string): Function {
+function applyParams(fnOrArray: Function | any[] | undefined, key: string): Function {
   if (fnOrArray === Object || fnOrArray === String || fnOrArray === Function ||
       fnOrArray === Number || fnOrArray === Array) {
     throw new Error(`Can not use native ${stringify(fnOrArray)} as constructor`);
@@ -106,7 +107,7 @@ function applyParams(fnOrArray: (Function | any[]), key: string): Function {
   }
 
   if (Array.isArray(fnOrArray)) {
-    const annotations: any[] = fnOrArray;
+    const annotations: any[] = fnOrArray as any[];
     const annoLength = annotations.length - 1;
     const fn: Function = fnOrArray[annoLength];
     if (typeof fn !== 'function') {
@@ -220,6 +221,7 @@ function applyParams(fnOrArray: (Function | any[]), key: string): Function {
  *   }
  * });
  * ```
+ * @suppress {globalThis}
  * @stable
  */
 export function Class(clsDef: ClassDefinition): Type<any> {
@@ -256,9 +258,12 @@ export function Class(clsDef: ClassDefinition): Type<any> {
   return <Type<any>>constructor;
 }
 
+/**
+ * @suppress {globalThis}
+ */
 export function makeDecorator(
     name: string, props: {[name: string]: any}, parentClass?: any,
-    chainFn: (fn: Function) => void = null): (...args: any[]) => (cls: any) => any {
+    chainFn?: (fn: Function) => void): (...args: any[]) => (cls: any) => any {
   const metaCtor = makeMetadataCtor([props]);
 
   function DecoratorFactory(objOrType: any): (cls: any) => any {
@@ -327,7 +332,7 @@ export function makeParamDecorator(
     return ParamDecorator;
 
     function ParamDecorator(cls: any, unusedKey: any, index: number): any {
-      const parameters: any[][] = Reflect.getOwnMetadata('parameters', cls) || [];
+      const parameters: (any[] | null)[] = Reflect.getOwnMetadata('parameters', cls) || [];
 
       // there might be gaps if some in between parameters do not have annotations.
       // we pad with nulls.
@@ -336,7 +341,7 @@ export function makeParamDecorator(
       }
 
       parameters[index] = parameters[index] || [];
-      parameters[index].push(annotationInstance);
+      parameters[index] !.push(annotationInstance);
 
       Reflect.defineMetadata('parameters', parameters, cls);
       return cls;

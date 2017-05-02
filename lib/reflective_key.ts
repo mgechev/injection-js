@@ -65,7 +65,7 @@ export class KeyRegistry {
     if (token instanceof ReflectiveKey) return token;
 
     if (this._allKeys.has(token)) {
-      return this._allKeys.get(token);
+      return this._allKeys.get(token) !;
     }
 
     const newKey = new ReflectiveKey(token, ReflectiveKey.numberOfKeys);

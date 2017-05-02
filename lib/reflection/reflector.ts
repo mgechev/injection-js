@@ -49,8 +49,10 @@ export class Reflector extends ReflectorReader {
 
   importUri(type: any): string { return this.reflectionCapabilities.importUri(type); }
 
-  resolveIdentifier(name: string, moduleUrl: string, runtime: any): any {
-    return this.reflectionCapabilities.resolveIdentifier(name, moduleUrl, runtime);
+  resourceUri(type: any): string { return this.reflectionCapabilities.resourceUri(type); }
+
+  resolveIdentifier(name: string, moduleUrl: string, members: string[]|null, runtime: any): any {
+    return this.reflectionCapabilities.resolveIdentifier(name, moduleUrl, members, runtime);
   }
 
   resolveEnum(identifier: any, name: string): any {

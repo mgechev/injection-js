@@ -50,6 +50,8 @@ const injector = ReflectiveInjector.resolveAndCreate([
 console.log(injector.get(Service) instanceof Service);
 ```
 
+**Note**: you will need to enable the TypeScript flags `experimentalDecorators` and `emitDecoratorMetadata` to make this work.
+
 ## ES6
 
 ```js

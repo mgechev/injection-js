@@ -22,5 +22,5 @@ export {Provider, TypeProvider, ValueProvider, ClassProvider, ExistingProvider, 
 export {ResolvedReflectiveFactory, ResolvedReflectiveProvider} from './reflective_provider';
 export {ReflectiveKey} from './reflective_key';
 export {InjectionToken, OpaqueToken} from './injection_token';
-export {Class} from './util/decorators';
-
+export {Class, TypeDecorator, makeDecorator} from './util/decorators';
+export {Type} from './facade/type';

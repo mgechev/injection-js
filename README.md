@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mgechev/injection-js.svg?branch=master)](https://travis-ci.org/mgechev/injection-js)
+[![Build Status](https://travis-ci.org/mgechev/injection-js.svg?branch=master)](https://travis-ci.org/mgechev/injection-js) ![Downloads](https://img.shields.io/npm/dm/injection-js.svg)
 
 # Dependency Injection
 

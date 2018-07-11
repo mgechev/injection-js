@@ -15,4 +15,3 @@ class Service {
 const injector = ReflectiveInjector.resolveAndCreate([Http, Service]);
 
 console.log(injector.get(Service) instanceof Service);
-

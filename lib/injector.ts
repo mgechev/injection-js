@@ -6,14 +6,15 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {stringify} from './facade/lang';
-import {Type} from './facade/type';
+import { stringify } from './facade/lang';
+import { Type } from './facade/type';
 
-import {InjectionToken} from './injection_token';
+import { InjectionToken } from './injection_token';
 
 const _THROW_IF_NOT_FOUND = new Object();
 export const THROW_IF_NOT_FOUND = _THROW_IF_NOT_FOUND;
 
+// tslint:disable-next-line:class-name no-use-before-declare
 class _NullInjector implements Injector {
   get(token: any, notFoundValue: any = _THROW_IF_NOT_FOUND): any {
     if (notFoundValue === _THROW_IF_NOT_FOUND) {
@@ -54,7 +55,7 @@ export abstract class Injector {
    * Injector.THROW_IF_NOT_FOUND is given
    * - Returns the `notFoundValue` otherwise
    */
-  abstract get<T>(token: Type<T>|InjectionToken<T>, notFoundValue?: T): T;
+  abstract get<T>(token: Type<T> | InjectionToken<T>, notFoundValue?: T): T;
   /**
    * @deprecated from v4.0.0 use Type<T> or InjectionToken<T>
    * @suppress {duplicate}

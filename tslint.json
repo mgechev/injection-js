@@ -1,33 +1,32 @@
 {
+  "extends": [
+    "tslint-config-prettier"
+  ],
   "rules": {
     "class-name": true,
     "curly": false,
-    "eofline": true,
-    "indent": [true, "spaces"],
-    "max-line-length": [true, 140],
-    "member-ordering": [true,
-      "public-before-private",
-      "static-before-instance",
-      "variables-before-functions"
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          // @FIXME: Following rules are not valid anymore https://palantir.github.io/tslint/rules/member-ordering/
+          "public-before-private",
+          "static-before-instance",
+          "variables-before-functions"
+        ]
+      }
     ],
     "no-arg": true,
     "no-construct": true,
     "no-duplicate-variable": true,
     "no-empty": true,
     "no-eval": true,
-    "no-trailing-whitespace": true,
     "no-unused-expression": true,
     "no-use-before-declare": true,
-    "one-line": [true,
-      "check-open-brace",
-      "check-catch",
-      "check-else",
-      "check-whitespace"
+    "triple-equals": [
+      true,
+      "allow-null-check"
     ],
-    "quotemark": [true, "single"],
-    "semicolon": [true, "always"],
-    "trailing-comma": true,
-    "triple-equals": true,
     "variable-name": false
   }
 }

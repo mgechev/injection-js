@@ -6,10 +6,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {stringify} from './facade/lang';
+import { stringify } from './facade/lang';
 
-import {resolveForwardRef} from './forward_ref';
-
+import { resolveForwardRef } from './forward_ref';
 
 /**
  * A unique object used for retrieving items from the {@link ReflectiveInjector}.
@@ -40,19 +39,25 @@ export class ReflectiveKey {
   /**
    * Returns a stringified token.
    */
-  get displayName(): string { return stringify(this.token); }
+  get displayName(): string {
+    return stringify(this.token);
+  }
 
   /**
    * Retrieves a `Key` for a token.
    */
   static get(token: Object): ReflectiveKey {
+    // tslint:disable-next-line:no-use-before-declare
     return _globalKeyRegistry.get(resolveForwardRef(token));
   }
 
   /**
    * @returns the number of keys registered in the system.
    */
-  static get numberOfKeys(): number { return _globalKeyRegistry.numberOfKeys; }
+  static get numberOfKeys(): number {
+    // tslint:disable-next-line:no-use-before-declare
+    return _globalKeyRegistry.numberOfKeys;
+  }
 }
 
 /**
@@ -65,7 +70,7 @@ export class KeyRegistry {
     if (token instanceof ReflectiveKey) return token;
 
     if (this._allKeys.has(token)) {
-      return this._allKeys.get(token) !;
+      return this._allKeys.get(token)!;
     }
 
     const newKey = new ReflectiveKey(token, ReflectiveKey.numberOfKeys);
@@ -73,7 +78,9 @@ export class KeyRegistry {
     return newKey;
   }
 
-  get numberOfKeys(): number { return this._allKeys.size; }
+  get numberOfKeys(): number {
+    return this._allKeys.size;
+  }
 }
 
 const _globalKeyRegistry = new KeyRegistry();

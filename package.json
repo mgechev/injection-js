@@ -6,6 +6,9 @@
   "module": "index.js",
   "jsnext:main": "index.js",
   "types": "index.d.ts",
+  "engines": {
+    "node": ">=8.5"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mgechev/injection-js.git"
@@ -13,19 +16,24 @@
   "dependencies": {},
   "devDependencies": {
     "@types/jasmine": "^2.5.41",
-    "@types/node": "^7.0.2",
+    "@types/node": "^8.5.0",
     "jasmine": "^2.5.3",
+    "prettier": "1.13.7",
     "reflect-metadata": "^0.1.9",
     "rimraf": "^2.5.4",
     "rollup": "^0.41.4",
-    "ts-node": "^2.0.0",
-    "tslint": "^4.3.1",
+    "tslint": "5.10.0",
+    "tslint-config-prettier": "1.13.0",
     "typescript": "^2.0.0"
   },
   "scripts": {
-    "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && cp package.json dist && ts-node -P tsconfig-ts-node.json tools/cleanup.ts && cp README.md dist",
+    "prebuild": "npm run verify && npm t",
+    "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && node tools/copy.js",
     "build:test": "rimraf dist-test && tsc -p tsconfig-test.json",
-    "test": "npm run build:test && jasmine"
+    "test": "npm run build:test && jasmine",
+    "format": "prettier \"**/*.{js,ts,md,css,less,sass,scss}\"",
+    "lint": "tslint -p tsconfig.json",
+    "verify": "tsc -p tools && npm run format -- -l && npm run lint"
   },
   "keywords": [
     "DI",

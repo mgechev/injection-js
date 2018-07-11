@@ -53,16 +53,11 @@ class Service2 {
   }
 
   createChildInjector(): void {
-    const childInjector = ReflectiveInjector.resolveAndCreate([
-      Service
-    ], this.injector);
+    const childInjector = ReflectiveInjector.resolveAndCreate([Service], this.injector);
   }
 }
 
-const injector = ReflectiveInjector.resolveAndCreate([
-  Service,
-  Http
-]);
+const injector = ReflectiveInjector.resolveAndCreate([Service, Http]);
 
 console.log(injector.get(Service) instanceof Service);
 ```
@@ -96,13 +91,16 @@ require('reflect-metadata');
 var di = require('injection-js');
 
 var Http = di.Class({
-  constructor: function () {}
+  constructor: function() {},
 });
 
 var Service = di.Class({
-  constructor: [Http, function (http) {
-    this.http = http;
-  }]
+  constructor: [
+    Http,
+    function(http) {
+      this.http = http;
+    },
+  ],
 });
 
 var injector = di.ReflectiveInjector.resolveAndCreate([Http, Service]);
@@ -119,4 +117,3 @@ For full documentation check Angular DI docs:
 # License
 
 MIT
-

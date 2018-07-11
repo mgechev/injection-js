@@ -6,10 +6,10 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {ReflectionCapabilities} from './reflection_capabilities';
-import {Reflector} from './reflector';
+import { ReflectionCapabilities } from './reflection_capabilities';
+import { Reflector } from './reflector';
 
-export {Reflector} from './reflector';
+export { Reflector } from './reflector';
 
 /**
  * The {@link Reflector} used internally in Angular to access metadata

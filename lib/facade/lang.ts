@@ -15,7 +15,7 @@ export interface BrowserNodeGlobal {
   Date: DateConstructor;
   RegExp: RegExpConstructor;
   JSON: typeof JSON;
-  Math: any;  // typeof Math;
+  Math: any; // typeof Math;
   assert(condition: any): void;
   Reflect: any;
   getAngularTestability: Function;
@@ -52,7 +52,7 @@ if (typeof window === 'undefined') {
 // exports the original value of the symbol.
 const _global: BrowserNodeGlobal = globalScope;
 
-export {_global as global};
+export { _global as global };
 
 export function isPresent(obj: any): boolean {
   return obj != null;
@@ -83,11 +83,11 @@ export function stringify(token: any): string {
 export abstract class DebugContext {
   // We don't really need this
   // abstract get view(): ViewData;
-  abstract get nodeIndex(): number|null;
+  abstract get nodeIndex(): number | null;
   abstract get injector(): Injector;
   abstract get component(): any;
   abstract get providerTokens(): any[];
-  abstract get references(): {[key: string]: any};
+  abstract get references(): { [key: string]: any };
   abstract get context(): any;
   abstract get componentRenderElement(): any;
   abstract get renderNode(): any;

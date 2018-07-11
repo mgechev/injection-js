@@ -6,8 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {makeDecorator, makeParamDecorator} from './util/decorators';
-
+import { makeDecorator, makeParamDecorator } from './util/decorators';
 
 /**
  * Type of the Inject decorator / constructor function.
@@ -50,7 +49,9 @@ export interface InjectDecorator {
  *
  * @stable
  */
-export interface Inject { token: any; }
+export interface Inject {
+  token: any;
+}
 
 /**
  * Inject decorator and metadata.
@@ -59,7 +60,6 @@ export interface Inject { token: any; }
  * @Annotation
  */
 export const Inject: InjectDecorator = makeParamDecorator('Inject', [['token', undefined]]);
-
 
 /**
  * Type of the Optional decorator / constructor function.
@@ -196,7 +196,6 @@ export interface Self {}
  * @Annotation
  */
 export const Self: SelfDecorator = makeParamDecorator('Self', []);
-
 
 /**
  * Type of the SkipSelf decorator / constructor function.

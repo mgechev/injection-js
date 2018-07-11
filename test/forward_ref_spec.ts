@@ -6,8 +6,8 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Type} from '../lib/facade/type';
-import {forwardRef, resolveForwardRef} from '../lib';
+import { Type } from '../lib/facade/type';
+import { forwardRef, resolveForwardRef } from '../lib';
 
 describe('forwardRef', function() {
   it('should wrap and unwrap the reference', () => {

@@ -16,11 +16,20 @@ This means that **if you need dependency injection outside of Angular `@angular/
 
 # How to use?
 
-```
-$ npm i injection-js --save
+```sh
+$ npm i injection-js
+# OR
+$ yarn add injection-js
 ```
 
-Note that for ES5 `Class` syntax and TypeScript you need a polyfill for the [Reflect API](http://www.ecma-international.org/ecma-262/6.0/#sec-reflection). You can use, for instance, [reflect-metadata](https://www.npmjs.com/package/reflect-metadata), or [`core-js` (`core-js/es7/reflect`)](https://www.npmjs.com/package/core-js).
+> **Note:**
+>
+> For ES5 `Class` syntax and TypeScript you need a polyfill for the [Reflect API](http://www.ecma-international.org/ecma-262/6.0/#sec-reflection).
+> You can use:
+> - [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
+> - [`core-js` (`core-js/es7/reflect`)](https://www.npmjs.com/package/core-js)
+>
+> Also for TypeScript you will need to enable `experimentalDecorators` and `emitDecoratorMetadata` flags within your `tsconfig.json`
 
 ## TypeScript
 
@@ -38,11 +47,11 @@ class Service {
 @Injectable()
 class Service2 {
   constructor(private injector: Injector) {}
-  
+
   getService(): void {
     console.log(this.injector.get(Service) instanceof Service);
   }
-  
+
   createChildInjector(): void {
     const childInjector = ReflectiveInjector.resolveAndCreate([
       Service
@@ -57,8 +66,6 @@ const injector = ReflectiveInjector.resolveAndCreate([
 
 console.log(injector.get(Service) instanceof Service);
 ```
-
-**Note**: you will need to enable the TypeScript flags `experimentalDecorators` and `emitDecoratorMetadata` to make this work.
 
 ## ES6
 
@@ -103,7 +110,11 @@ var injector = di.ReflectiveInjector.resolveAndCreate([Http, Service]);
 console.log(injector.get(Service) instanceof Service);
 ```
 
-For full documentation click [here](https://angular.io/docs/ts/latest/guide/dependency-injection.html), [here](https://angular.io/docs/ts/latest/cookbook/dependency-injection.html) and [here](https://angular.io/docs/ts/latest/cookbook/ts-to-js.html#!#dependency-injection).
+For full documentation check Angular DI docs:
+
+- [Dependency Injection](https://v4.angular.io/guide/dependency-injection)
+- [Dependency Injection in action](https://v4.angular.io/guide/dependency-injection-in-action)
+- [Dependency Injection without Typescript](https://v2.angular.io/docs/ts/latest/cookbook/ts-to-js.html#!#dependency-injection)
 
 # License
 

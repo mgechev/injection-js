@@ -26,6 +26,7 @@ $ yarn add injection-js
 >
 > For ES5 `Class` syntax and TypeScript you need a polyfill for the [Reflect API](http://www.ecma-international.org/ecma-262/6.0/#sec-reflection).
 > You can use:
+>
 > - [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
 > - [`core-js` (`core-js/es7/reflect`)](https://www.npmjs.com/package/core-js)
 >

@@ -54,8 +54,8 @@ export class ReflectiveKey {
   /**
    * @returns the number of keys registered in the system.
    */
-  // tslint:disable-next-line:no-use-before-declare
   static get numberOfKeys(): number {
+    // tslint:disable-next-line:no-use-before-declare
     return _globalKeyRegistry.numberOfKeys;
   }
 }

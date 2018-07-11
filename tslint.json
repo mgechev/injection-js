@@ -9,6 +9,7 @@
       true,
       {
         "order": [
+          // @FIXME: Following rules are not valid anymore https://palantir.github.io/tslint/rules/member-ordering/
           "public-before-private",
           "static-before-instance",
           "variables-before-functions"

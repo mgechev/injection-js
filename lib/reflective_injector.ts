@@ -145,6 +145,7 @@ export abstract class ReflectiveInjector implements Injector {
    */
   static fromResolvedProviders(providers: ResolvedReflectiveProvider[], parent?: Injector):
       ReflectiveInjector {
+    // tslint:disable-next-line:no-use-before-declare
     return new ReflectiveInjector_(providers, parent);
   }
 
@@ -276,6 +277,7 @@ export abstract class ReflectiveInjector implements Injector {
   abstract get(token: any, notFoundValue?: any): any;
 }
 
+// tslint:disable-next-line:class-name
 export class ReflectiveInjector_ implements ReflectiveInjector {
   /** @internal */
   _constructionCounter: number = 0;
@@ -389,6 +391,7 @@ export class ReflectiveInjector_ implements ReflectiveInjector {
   }
 
   private _getByKey(key: ReflectiveKey, visibility: Self|SkipSelf|null, notFoundValue: any): any {
+    // tslint:disable-next-line:no-use-before-declare
     if (key === INJECTOR_KEY) {
       return this;
     }

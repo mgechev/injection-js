@@ -46,12 +46,14 @@ export class ReflectiveKey {
    * Retrieves a `Key` for a token.
    */
   static get(token: Object): ReflectiveKey {
+    // tslint:disable-next-line:no-use-before-declare
     return _globalKeyRegistry.get(resolveForwardRef(token));
   }
 
   /**
    * @returns the number of keys registered in the system.
    */
+  // tslint:disable-next-line:no-use-before-declare
   static get numberOfKeys(): number { return _globalKeyRegistry.numberOfKeys; }
 }
 

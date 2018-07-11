@@ -42,6 +42,7 @@ export class ReflectionCapabilities implements PlatformReflectionCapabilities {
       // migration, but this can be revisited.
       if (typeof paramTypes === 'undefined') {
         result[i] = [];
+      // tslint:disable-next-line:triple-equals
       } else if (paramTypes[i] != Object) {
         result[i] = [paramTypes[i]];
       } else {

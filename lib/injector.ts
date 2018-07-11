@@ -14,6 +14,7 @@ import {InjectionToken} from './injection_token';
 const _THROW_IF_NOT_FOUND = new Object();
 export const THROW_IF_NOT_FOUND = _THROW_IF_NOT_FOUND;
 
+// tslint:disable-next-line:class-name no-use-before-declare
 class _NullInjector implements Injector {
   get(token: any, notFoundValue: any = _THROW_IF_NOT_FOUND): any {
     if (notFoundValue === _THROW_IF_NOT_FOUND) {

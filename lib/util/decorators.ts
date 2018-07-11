@@ -114,7 +114,7 @@ function applyParams(fnOrArray: Function | any[] | undefined, key: string): Func
       throw new Error(
           `Last position of Class method array must be Function in key ${key} was '${stringify(fn)}'`);
     }
-    if (annoLength != fn.length) {
+    if (annoLength !== fn.length) {
       throw new Error(
           `Number of annotations (${annoLength}) does not match number of arguments (${fn.length}) in the function: ${stringify(fn)}`);
     }

@@ -11,3 +11,5 @@ os:
 before_script:
   - npm install
 
+script:
+ - npm run build

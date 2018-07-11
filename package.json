@@ -27,7 +27,7 @@
     "typescript": "^2.0.0"
   },
   "scripts": {
-    "prebuild": "npm run verify",
+    "prebuild": "npm run verify && npm t",
     "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && node tools/copy.js",
     "build:test": "rimraf dist-test && tsc -p tsconfig-test.json",
     "test": "npm run build:test && jasmine",

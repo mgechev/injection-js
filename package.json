@@ -15,11 +15,13 @@
     "@types/jasmine": "^2.5.41",
     "@types/node": "^7.0.2",
     "jasmine": "^2.5.3",
+    "prettier": "1.13.7",
     "reflect-metadata": "^0.1.9",
     "rimraf": "^2.5.4",
     "rollup": "^0.41.4",
     "ts-node": "^2.0.0",
-    "tslint": "^4.3.1",
+    "tslint": "5.10.0",
+    "tslint-config-prettier": "1.13.0",
     "typescript": "^2.0.0"
   },
   "scripts": {

@@ -25,9 +25,12 @@
     "typescript": "^2.0.0"
   },
   "scripts": {
+    "prebuild": "npm run format -- -l && npm run lint",
     "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && cp package.json dist && ts-node -P tsconfig-ts-node.json tools/cleanup.ts && cp README.md dist",
     "build:test": "rimraf dist-test && tsc -p tsconfig-test.json",
-    "test": "npm run build:test && jasmine"
+    "test": "npm run build:test && jasmine",
+    "format": "prettier \"**/*.{js,ts,md,css,less,sass,scss}\"",
+    "lint": "tslint -p tsconfig.json"
   },
   "keywords": [
     "DI",

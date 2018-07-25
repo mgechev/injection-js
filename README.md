@@ -27,8 +27,9 @@ $ yarn add injection-js
 > For ES5 `Class` syntax and TypeScript you need a polyfill for the [Reflect API](http://www.ecma-international.org/ecma-262/6.0/#sec-reflection).
 > You can use:
 >
+> - [reflection](https://www.npmjs.com/package/@abraham/reflection) (only 3kb 🔥)
 > - [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
-> - [`core-js` (`core-js/es7/reflect`)](https://www.npmjs.com/package/core-js)
+> - [core-js (`core-js/es7/reflect`)](https://www.npmjs.com/package/core-js)
 >
 > Also for TypeScript you will need to enable `experimentalDecorators` and `emitDecoratorMetadata` flags within your `tsconfig.json`
 
@@ -109,11 +110,22 @@ var injector = di.ReflectiveInjector.resolveAndCreate([Http, Service]);
 console.log(injector.get(Service) instanceof Service);
 ```
 
+# API
+
 For full documentation check Angular DI docs:
 
 - [Dependency Injection](https://v4.angular.io/guide/dependency-injection)
 - [Dependency Injection in action](https://v4.angular.io/guide/dependency-injection-in-action)
 - [Dependency Injection without Typescript](https://v2.angular.io/docs/ts/latest/cookbook/ts-to-js.html#!#dependency-injection)
+
+# Ecosystem
+
+This is a list of libraries that are using injection-js. If you have a suggestion on what to add, please don't hesitate to submit a PR.
+
+## Libraries
+
+- [@martin_hotell/axios-http](https://github.com/Hotell/axios-http) Injectable axios HttpClient wrapper for browser and node
+- [@martin_hotell/rea-di](https://github.com/Hotell/rea-di) Dependency injection for React done right. Hierarchical injection on both component and service layer powered by injection-js (Angular DI framework) 🖖
 
 # License
 

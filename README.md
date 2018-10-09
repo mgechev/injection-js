@@ -124,8 +124,10 @@ This is a list of libraries that are using injection-js. If you have a suggestio
 
 ## Libraries
 
+- [ng-packagr](https://github.com/ng-packagr/ng-packagr) Transpile your libraries to Angular Package Format. Part of the official Angular CLI.
 - [@martin_hotell/axios-http](https://github.com/Hotell/axios-http) Injectable axios HttpClient wrapper for browser and node
 - [@martin_hotell/rea-di](https://github.com/Hotell/rea-di) Dependency injection for React done right. Hierarchical injection on both component and service layer powered by injection-js (Angular DI framework) 🖖
+- [rxstack](https://github.com/rxstack/rxstack) RxStack is a realtime object-oriented framework which helps you build a micro service web applications on top of other frameworks like express and socketio by adding an abstraction layer.
 
 # License
 

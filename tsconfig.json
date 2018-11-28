@@ -11,7 +11,8 @@
     "moduleResolution": "node",
     "lib": ["es2015", "dom"],
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "importHelpers": true
   },
   "files": [
     "./lib/index.ts"

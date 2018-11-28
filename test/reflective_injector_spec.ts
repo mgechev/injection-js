@@ -96,12 +96,12 @@ const dynamicProviders = [
   { provide: 'provider10', useValue: 1 },
 ];
 
-function createInjector(providers: Provider[], parent: ReflectiveInjector = null): ReflectiveInjector_ {
+function createInjector(providers: Provider[], parent: ReflectiveInjector | null = null): ReflectiveInjector_ {
   const resolvedProviders = ReflectiveInjector.resolve(providers.concat(dynamicProviders));
   if (isPresent(parent)) {
-    return <ReflectiveInjector_>parent.createChildFromResolved(resolvedProviders);
+    return parent.createChildFromResolved(resolvedProviders) as ReflectiveInjector_;
   } else {
-    return <ReflectiveInjector_>ReflectiveInjector.fromResolvedProviders(resolvedProviders);
+    return ReflectiveInjector.fromResolvedProviders(resolvedProviders) as ReflectiveInjector_;
   }
 }
 

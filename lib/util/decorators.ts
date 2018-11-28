@@ -221,7 +221,7 @@ function applyParams(fnOrArray: Function | any[] | undefined, key: string): Func
  * @suppress {globalThis}
  * @stable
  */
-export function Class(clsDef: ClassDefinition): Type<any> {
+export function Class(this: any, clsDef: ClassDefinition): Type<any> {
   const constructor = applyParams(clsDef.hasOwnProperty('constructor') ? clsDef.constructor : undefined, 'constructor');
 
   let proto = constructor.prototype;
@@ -263,7 +263,7 @@ export function makeDecorator(
 ): (...args: any[]) => (cls: any) => any {
   const metaCtor = makeMetadataCtor([props]);
 
-  function DecoratorFactory(objOrType: any): (cls: any) => any {
+  function DecoratorFactory(this: any, objOrType: any): (cls: any) => any {
     if (!(Reflect && Reflect.getOwnMetadata)) {
       throw 'reflect-metadata shim is required when using class decorators';
     }
@@ -298,7 +298,7 @@ export function makeDecorator(
 }
 
 function makeMetadataCtor(props: ([string, any] | { [key: string]: any })[]): any {
-  return function ctor(...args: any[]) {
+  return function ctor(this: any, ...args: any[]) {
     props.forEach((prop, i) => {
       const argVal = args[i];
       if (Array.isArray(prop)) {
@@ -315,7 +315,7 @@ function makeMetadataCtor(props: ([string, any] | { [key: string]: any })[]): an
 
 export function makeParamDecorator(name: string, props: ([string, any] | { [name: string]: any })[], parentClass?: any): any {
   const metaCtor = makeMetadataCtor(props);
-  function ParamDecoratorFactory(...args: any[]): any {
+  function ParamDecoratorFactory(this: unknown, ...args: any[]): any {
     if (this instanceof ParamDecoratorFactory) {
       metaCtor.apply(this, args);
       return this;
@@ -352,7 +352,7 @@ export function makeParamDecorator(name: string, props: ([string, any] | { [name
 export function makePropDecorator(name: string, props: ([string, any] | { [key: string]: any })[], parentClass?: any): any {
   const metaCtor = makeMetadataCtor(props);
 
-  function PropDecoratorFactory(...args: any[]): any {
+  function PropDecoratorFactory(this: unknown, ...args: any[]): any {
     if (this instanceof PropDecoratorFactory) {
       metaCtor.apply(this, args);
       return this;

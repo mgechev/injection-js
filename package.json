@@ -22,9 +22,9 @@
     "reflect-metadata": "^0.1.9",
     "rimraf": "^2.5.4",
     "rollup": "^0.41.4",
-    "tslint": "5.10.0",
-    "tslint-config-prettier": "1.13.0",
-    "typescript": "^2.0.0"
+    "tslint": "5.11.0",
+    "tslint-config-prettier": "1.17.0",
+    "typescript": "3.1.6"
   },
   "scripts": {
     "prebuild": "npm run verify && npm t",

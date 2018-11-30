@@ -22,6 +22,6 @@ export function isType(v: any): v is Type<any> {
   return typeof v === 'function';
 }
 
-export interface Type<T> extends Function {
+export interface Type<T = object> extends Function {
   new (...args: any[]): T;
 }

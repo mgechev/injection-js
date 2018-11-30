@@ -1,21 +1,12 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "es5",
     "module": "commonjs",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "stripInternal": true,
-    "declaration": true,
-    "outDir": "./dist-test",
-    "lib": ["es2015", "dom"]
+    "outDir": "./dist-test"
   },
-  "files": [
+  "include": [
     "./lib/index.ts",
-    "./test/forward_ref_spec.ts",
-    "./test/injector_spec.ts",
-    "./test/reflective_injector_spec.ts",
-    "./test/reflective_key_spec.ts"
+    "./test/*.ts"
   ],
   "angularCompilerOptions": {
     "skipTemplateCodegen": true

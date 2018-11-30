@@ -55,7 +55,7 @@ export function forwardRef(forwardRefFn: ForwardRefFn): Type<any> {
  */
 export function resolveForwardRef(type: any): any {
   if (typeof type === 'function' && type.hasOwnProperty('__forward_ref__') && type.__forward_ref__ === forwardRef) {
-    return (<ForwardRefFn>type)();
+    return (type as ForwardRefFn)();
   } else {
     return type;
   }

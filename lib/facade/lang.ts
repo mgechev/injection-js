@@ -54,7 +54,7 @@ const _global: BrowserNodeGlobal = globalScope;
 
 export { _global as global };
 
-export function isPresent(obj: any): boolean {
+export function isPresent<T>(obj: T): obj is NonNullable<T> {
   return obj != null;
 }
 

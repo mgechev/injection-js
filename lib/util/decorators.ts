@@ -270,7 +270,7 @@ export function makeDecorator(
 
     if (this instanceof DecoratorFactory) {
       metaCtor.call(this, objOrType);
-      return this;
+      return this as typeof DecoratorFactory;
     }
 
     const annotationInstance = new (<any>DecoratorFactory)(objOrType);

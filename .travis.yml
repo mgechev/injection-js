@@ -9,7 +9,7 @@ os:
   - linux
 
 before_script:
-  - npm ci
+  - npm install
 
 script:
  - npm run build

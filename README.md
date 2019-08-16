@@ -4,8 +4,6 @@
 
 Dependency injection library for JavaScript and TypeScript in **5.2K**. It is an extraction of the Angular's dependency injection which means that it's feature complete, fast, reliable and well tested.
 
-**Up-to-date with Angular 4.1**.
-
 # Why not Angular version 5 and above?
 
 Angular version 5 deprecated the `ReflectiveInjector` API and introduced `StaticInjector`. In short, the dependency injection in the newest versions of Angular will happen entirely compile-time so reflection will not be necessary.

@@ -7,14 +7,7 @@
     "curly": false,
     "member-ordering": [
       true,
-      {
-        "order": [
-          // @FIXME: Following rules are not valid anymore https://palantir.github.io/tslint/rules/member-ordering/
-          "public-before-private",
-          "static-before-instance",
-          "variables-before-functions"
-        ]
-      }
+      "statics-first"
     ],
     "no-arg": true,
     "no-construct": true,
@@ -22,7 +15,6 @@
     "no-empty": true,
     "no-eval": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "triple-equals": [
       true,
       "allow-null-check"

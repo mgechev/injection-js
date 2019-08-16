@@ -1,4 +1,6 @@
 export default {
-  format: 'umd',
-  moduleName: 'injection-js',
+  output: {
+    format: 'umd',
+    name: 'injection-js',
+  },
 };

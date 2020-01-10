@@ -23,4 +23,5 @@ export { ResolvedReflectiveFactory, ResolvedReflectiveProvider } from './reflect
 export { ReflectiveKey } from './reflective_key';
 export { InjectionToken, OpaqueToken } from './injection_token';
 export { Class, TypeDecorator, makeDecorator } from './util/decorators';
+export { resolveDependencies } from './util/resolve_dependencies';
 export { Type, isType } from './facade/type';

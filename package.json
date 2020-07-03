@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/mgechev/injection-js.git"
   },
-  "peerDependencies": {
+  "dependencies": {
     "tslib": "^1.9.3"
   },
   "devDependencies": {

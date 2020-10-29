@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig-es5.test.json",
+  "compilerOptions": {
+    "target": "es2015",
+    "outDir": "./dist/test/es2015"
+  }
+}

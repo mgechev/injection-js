@@ -14,26 +14,25 @@
     "url": "git+https://github.com/mgechev/injection-js.git"
   },
   "dependencies": {
-    "tslib": "^1.9.3"
+    "tslib": "^2.0.0"
   },
   "devDependencies": {
     "@types/jasmine": "^3.4.0",
-    "@types/node": "^12.7.2",
+    "@types/node": "^14.14.6",
     "jasmine": "^3.4.0",
     "prettier": "1.18.2",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rollup": "^1.19.4",
-    "tslib": "^1.10.0",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.00",
-    "typescript": "^3.5.3"
+    "typescript": "^4.0.0"
   },
   "scripts": {
     "prebuild": "npm run verify && npm t",
     "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && node tools/copy.js",
-    "build:test": "rimraf dist-test && tsc -p tsconfig-test.json",
-    "test": "npm run build:test && jasmine",
+    "pretest": "rimraf dist/test && tsc -p tsconfig-es5.test.json && tsc -p tsconfig-es2015.test.json",
+    "test": "jasmine",
     "format": "prettier \"**/*.{js,ts,md,css,less,sass,scss}\"",
     "lint": "tslint -p tsconfig.json",
     "verify": "tsc -p tools && npm run format -- -l && npm run lint"

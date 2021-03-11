@@ -32,7 +32,7 @@ import { Type } from './facade/type';
  *
  * @stable
  */
-export interface TypeProvider extends Type<any> {}
+export type TypeProvider = Type<any>;
 
 /**
  * @whatItDoes Configures the {@link Injector} to return a value for a token.

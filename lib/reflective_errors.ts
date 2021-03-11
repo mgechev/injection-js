@@ -29,7 +29,7 @@ function findFirstClosedCycle(keys: any[]): any[] {
 function constructResolvingPath(keys: any[]): string {
   if (keys.length > 1) {
     const reversed = findFirstClosedCycle(keys.slice().reverse());
-    const tokenStrs = reversed.map(k => stringify(k.token));
+    const tokenStrs = reversed.map((k) => stringify(k.token));
     return ' (' + tokenStrs.join(' -> ') + ')';
   }
 
@@ -80,7 +80,7 @@ function addKey(this: InjectionError, injector: ReflectiveInjector, key: Reflect
  * ```
  */
 export function noProviderError(injector: ReflectiveInjector, key: ReflectiveKey): InjectionError {
-  return injectionError(injector, key, function(this: InjectionError) {
+  return injectionError(injector, key, function (this: InjectionError) {
     const first = stringify(this.keys[0].token);
     return `No provider for ${first}!${constructResolvingPath(this.keys)}`;
   });
@@ -103,7 +103,7 @@ export function noProviderError(injector: ReflectiveInjector, key: ReflectiveKey
  * Retrieving `A` or `B` throws a `CyclicDependencyError` as the graph above cannot be constructed.
  */
 export function cyclicDependencyError(injector: ReflectiveInjector, key: ReflectiveKey): InjectionError {
-  return injectionError(injector, key, function(this: InjectionError) {
+  return injectionError(injector, key, function (this: InjectionError) {
     return `Cannot instantiate cyclic dependency!${constructResolvingPath(this.keys)}`;
   });
 }
@@ -143,7 +143,7 @@ export function instantiationError(
   return injectionError(
     injector,
     key,
-    function(this: InjectionError) {
+    function (this: InjectionError) {
       const first = stringify(this.keys[0].token);
       return `${getOriginalError(this).message}: Error during instantiation of ${first}!${constructResolvingPath(this.keys)}.`;
     },
@@ -247,6 +247,7 @@ export function outOfBoundsError(index: number) {
  * ])).toThrowError();
  * ```
  */
+
 export function mixingMultiProvidersWithRegularProvidersError(provider1: any, provider2: any): Error {
   return Error(`Cannot mix multi providers and regular providers, got: ${provider1} ${provider2}`);
 }

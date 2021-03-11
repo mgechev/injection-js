@@ -7,9 +7,10 @@
  */
 
 import { Type } from '../lib/facade/type';
+
 import { forwardRef, resolveForwardRef } from '../lib';
 
-describe('forwardRef', function() {
+describe('forwardRef', function () {
   it('should wrap and unwrap the reference', () => {
     const ref = forwardRef(() => String);
     expect(ref instanceof Type).toBe(true);

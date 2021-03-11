@@ -167,7 +167,7 @@ export class ReflectionCapabilities implements PlatformReflectionCapabilities {
     if ((<any>typeOrFunc).propDecorators && (<any>typeOrFunc).propDecorators !== parentCtor.propDecorators) {
       const propDecorators = (<any>typeOrFunc).propDecorators;
       const propMetadata = <{ [key: string]: any[] }>{};
-      Object.keys(propDecorators).forEach(prop => {
+      Object.keys(propDecorators).forEach((prop) => {
         propMetadata[prop] = convertTsickleDecoratorIntoMetadata(propDecorators[prop]);
       });
       return propMetadata;
@@ -188,13 +188,13 @@ export class ReflectionCapabilities implements PlatformReflectionCapabilities {
     const propMetadata: { [key: string]: any[] } = {};
     if (parentCtor !== Object) {
       const parentPropMetadata = this.propMetadata(parentCtor);
-      Object.keys(parentPropMetadata).forEach(propName => {
+      Object.keys(parentPropMetadata).forEach((propName) => {
         propMetadata[propName] = parentPropMetadata[propName];
       });
     }
     const ownPropMetadata = this._ownPropMetadata(typeOrFunc, parentCtor);
     if (ownPropMetadata) {
-      Object.keys(ownPropMetadata).forEach(propName => {
+      Object.keys(ownPropMetadata).forEach((propName) => {
         const decorators: any[] = [];
         if (propMetadata.hasOwnProperty(propName)) {
           decorators.push(...propMetadata[propName]);
@@ -250,7 +250,7 @@ function convertTsickleDecoratorIntoMetadata(decoratorInvocations: any[]): any[]
   if (!decoratorInvocations) {
     return [];
   }
-  return decoratorInvocations.map(decoratorInvocation => {
+  return decoratorInvocations.map((decoratorInvocation) => {
     const decoratorType = decoratorInvocation.type;
     const annotationCls = decoratorType.annotationCls;
     const annotationArgs = decoratorInvocation.args ? decoratorInvocation.args : [];

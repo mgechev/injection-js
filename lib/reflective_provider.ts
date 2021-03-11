@@ -178,7 +178,7 @@ export function mergeResolvedReflectiveProviders(
 }
 
 function _normalizeProviders(providers: Provider[], res: Provider[]): NormalizedProvider[] {
-  providers.forEach(b => {
+  providers.forEach((b) => {
     if (b instanceof Type) {
       res.push({ provide: b, useClass: b });
     } else if (b && typeof b === 'object' && (b as any).provide !== undefined) {
@@ -197,8 +197,8 @@ export function constructDependencies(typeOrFunc: any, dependencies?: any[]): Re
   if (!dependencies) {
     return _dependenciesFor(typeOrFunc);
   } else {
-    const params: any[][] = dependencies.map(t => [t]);
-    return dependencies.map(t => _extractToken(typeOrFunc, t, params));
+    const params: any[][] = dependencies.map((t) => [t]);
+    return dependencies.map((t) => _extractToken(typeOrFunc, t, params));
   }
 }
 
@@ -206,10 +206,10 @@ function _dependenciesFor(typeOrFunc: any): ReflectiveDependency[] {
   const params = reflector.parameters(typeOrFunc);
 
   if (!params) return [];
-  if (params.some(p => p == null)) {
+  if (params.some((p) => p == null)) {
     throw noAnnotationError(typeOrFunc, params);
   }
-  return params.map(p => _extractToken(typeOrFunc, p, params));
+  return params.map((p) => _extractToken(typeOrFunc, p, params));
 }
 
 function _extractToken(typeOrFunc: any, metadata: any[] | any, params: any[][]): ReflectiveDependency {

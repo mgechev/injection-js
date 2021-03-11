@@ -60,7 +60,7 @@ export function resolveDependencies(...inputs: Constructor[]) {
     ReflectiveInjector.resolve([klass])
       .reduce((a, x: ResolvedReflectiveProvider) => a.concat(x.resolvedFactories), [] as ResolvedReflectiveFactory[])
       .reduce((a, r: ResolvedReflectiveFactory) => a.concat(r.dependencies), [] as ReflectiveDependency[])
-      .forEach(d => resolver(d.key.token as Constructor));
+      .forEach((d) => resolver(d.key.token as Constructor));
   }
 
   for (const input of inputs) {

@@ -283,7 +283,7 @@ export abstract class ReflectiveInjector implements Injector {
 // tslint:disable-next-line:class-name
 export class ReflectiveInjector_ implements ReflectiveInjector {
   /** @internal */
-  _constructionCounter: number = 0;
+  _constructionCounter = 0;
   /** @internal */
   public _providers: ResolvedReflectiveProvider[];
   /** @internal */
@@ -372,8 +372,8 @@ export class ReflectiveInjector_ implements ReflectiveInjector {
 
     let deps: any[];
     try {
-      deps = ResolvedReflectiveFactory.dependencies.map(dep => this._getByReflectiveDependency(dep));
-    } catch (e) {
+      deps = ResolvedReflectiveFactory.dependencies.map((dep) => this._getByReflectiveDependency(dep));
+    } catch (e: any) {
       if (e.addKey) {
         e.addKey(this, provider.key);
       }
@@ -383,7 +383,7 @@ export class ReflectiveInjector_ implements ReflectiveInjector {
     let obj: any;
     try {
       obj = factory(...deps);
-    } catch (e) {
+    } catch (e: any) {
       throw instantiationError(this, e, e.stack, provider.key);
     }
 

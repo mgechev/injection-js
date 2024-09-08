@@ -6,7 +6,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
+import { Type } from './facade/type';
 import { Injector, THROW_IF_NOT_FOUND } from './injector';
+import { setCurrentInjector } from './injector_compatibility';
 import { Self, SkipSelf } from './metadata';
 import { Provider } from './provider';
 import { cyclicDependencyError, instantiationError, noProviderError, outOfBoundsError } from './reflective_errors';
@@ -333,7 +335,7 @@ export class ReflectiveInjector_ implements ReflectiveInjector {
   }
 
   instantiateResolved(provider: ResolvedReflectiveProvider): any {
-    return this._instantiateProvider(provider);
+    return this._instantiateProviderContext(provider);
   }
 
   getProviderAtIndex(index: number): ResolvedReflectiveProvider {
@@ -348,11 +350,20 @@ export class ReflectiveInjector_ implements ReflectiveInjector {
     if (this._constructionCounter++ > this._getMaxNumberOfObjects()) {
       throw cyclicDependencyError(this, provider.key);
     }
-    return this._instantiateProvider(provider);
+    return this._instantiateProviderContext(provider);
   }
 
   private _getMaxNumberOfObjects(): number {
     return this.objs.length;
+  }
+
+  private _instantiateProviderContext(provider: ResolvedReflectiveProvider): any {
+    const previousInjector = setCurrentInjector(this);
+    try {
+      return this._instantiateProvider(provider);
+    } finally {
+      setCurrentInjector(previousInjector);
+    }
   }
 
   private _instantiateProvider(provider: ResolvedReflectiveProvider): any {

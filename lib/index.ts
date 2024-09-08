@@ -25,3 +25,4 @@ export { InjectionToken, OpaqueToken } from './injection_token';
 export { Class, TypeDecorator, makeDecorator, makeParamDecorator, makePropDecorator } from './util/decorators';
 export { resolveDependencies } from './util/resolve_dependencies';
 export { Type, isType } from './facade/type';
+export { inject } from './injector_compatibility';

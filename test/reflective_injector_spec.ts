@@ -19,6 +19,7 @@ import {
   ReflectiveKey,
   Self,
   forwardRef,
+  inject,
 } from '../lib';
 import { ReflectiveInjector_ } from '../lib/reflective_injector';
 import { ResolvedReflectiveProvider_ } from '../lib/reflective_provider';
@@ -39,6 +40,13 @@ class DashboardSoftware {}
 @Injectable()
 class Dashboard {
   constructor(software: DashboardSoftware) {}
+}
+
+class GloveboxManual {}
+
+@Injectable()
+class Glovebox {
+  manual = inject(GloveboxManual);
 }
 
 class TurboEngine extends Engine {}
@@ -350,6 +358,13 @@ describe(`injector`, () => {
   it('should support null values', () => {
     const injector = createInjector([{ provide: 'null', useValue: null }]);
     expect(injector.get('null')).toBe(null);
+  });
+
+  it('should support the inject() function', () => {
+    const injector = createInjector([Glovebox, GloveboxManual]);
+    const glovebox = injector.get(Glovebox);
+    expect(glovebox instanceof Glovebox).toBe(true);
+    expect(glovebox.manual instanceof GloveboxManual).toBe(true);
   });
 });
 

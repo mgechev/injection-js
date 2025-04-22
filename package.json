@@ -17,6 +17,8 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.25.1",
     "@types/jasmine": "^5.1.7",
     "@types/node": "^22.14.1",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
@@ -24,6 +26,7 @@
     "eslint": "^9.25.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.6",
+    "globals": "^16.0.0",
     "jasmine": "^5.6.0",
     "prettier": "^3.5.3",
     "reflect-metadata": "^0.2.2",
@@ -34,10 +37,10 @@
   "scripts": {
     "prebuild": "npm run verify && npm t",
     "build": "rimraf dist && tsc && rollup -c rollup.config.js -i dist/index.js > dist/injection.bundle.js && node tools/copy.js",
-    "pretest": "rimraf dist/test && tsc -p tsconfig-es5.test.json && tsc -p tsconfig-es2015.test.json",
+    "pretest": "rimraf dist/test && tsc -p tsconfig-es2015.test.json",
     "test": "jasmine",
-    "format": "eslint -c .eslintrc.js lib/**/*.ts --fix && eslint -c .eslintrc.js test/*.ts --fix",
-    "lint": "eslint -c .eslintrc.js lib/**/*.ts && eslint -c .eslintrc.js test/*.ts",
+    "format": "eslint -c eslint.config.mjs lib/**/*.ts --fix && eslint -c eslint.config.mjs test/*.ts --fix",
+    "lint": "eslint -c eslint.config.mjs lib/**/*.ts && eslint -c eslint.config.mjs test/*.ts",
     "verify": "tsc -p tools && npm run format && npm run lint"
   },
   "keywords": [

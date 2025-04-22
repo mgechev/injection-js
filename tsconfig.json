@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
+    "target": "es2015",
+    "module": "ES2015",
     "sourceMap": true,
     "inlineSources": true,
     "emitDecoratorMetadata": true,
@@ -10,6 +10,7 @@
     "declaration": true,
     "outDir": "./dist",
     "moduleResolution": "node",
+    "allowJs": true,
     "lib": [
       "es2015",
       "dom"

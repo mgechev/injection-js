@@ -33,6 +33,25 @@ $ yarn add injection-js
 
 ## TypeScript
 
+Using the latest `inject` function:
+
+```ts
+import { inject, ReflectiveInjector } from 'injection-js';
+
+class Http {}
+
+class Service {
+  http = inject(Http);
+}
+
+const injector = ReflectiveInjector.resolveAndCreate([Http, Service]);
+
+console.log(injector.get(Service) instanceof Service);
+console.log(injector.get(Service).http instanceof Http);
+```
+
+Using `@Injectable` and `reflect-metadata`:
+
 ```ts
 import 'reflect-metadata';
 import { ReflectiveInjector, Injectable, Injector } from 'injection-js';

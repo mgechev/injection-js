@@ -20,4 +20,14 @@ describe('Injector.NULL', () => {
   it('should return the default value', () => {
     expect(Injector.NULL.get('someToken', 'notFound')).toEqual('notFound');
   });
+
+  it('should correctly return tuple of multiple default values', () => {
+    expect(
+      Injector.NULL.getMany(
+        { token: Object, notFoundValue: 'A' },
+        { token: Object, notFoundValue: 'B' },
+        { token: Object, notFoundValue: 'C' }
+      )
+    ).toEqual(['A', 'B', 'C']);
+  });
 });

@@ -7,7 +7,7 @@
  */
 
 import { Type } from './facade/type';
-import { Injector, THROW_IF_NOT_FOUND } from './injector';
+import { Injector, type InjectorGetManyParam, type InjectorGetManySignature, THROW_IF_NOT_FOUND } from './injector';
 import { setCurrentInjector } from './injector_compatibility';
 import { Self, SkipSelf } from './metadata';
 import { Provider } from './provider';
@@ -280,6 +280,8 @@ export abstract class ReflectiveInjector implements Injector {
   abstract instantiateResolved(provider: ResolvedReflectiveProvider): any;
 
   abstract get(token: any, notFoundValue?: any): any;
+
+  abstract getMany<Tokens extends InjectorGetManyParam<any>[]>(...tokens: Tokens): InjectorGetManySignature<Tokens>;
 }
 
 // tslint:disable-next-line:class-name
@@ -313,6 +315,10 @@ export class ReflectiveInjector_ implements ReflectiveInjector {
 
   get(token: any, notFoundValue: any = THROW_IF_NOT_FOUND): any {
     return this._getByKey(ReflectiveKey.get(token), null, notFoundValue);
+  }
+
+  getMany<Tokens extends InjectorGetManyParam<any>[]>(...tokens: Tokens): InjectorGetManySignature<Tokens> {
+    return tokens.map(({ token, notFoundValue }) => this.get(token, notFoundValue)) as InjectorGetManySignature<Tokens>;
   }
 
   get parent(): Injector | null {

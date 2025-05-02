@@ -22,6 +22,9 @@ class _NullInjector implements Injector {
     }
     return notFoundValue;
   }
+  getMany<Tokens extends InjectorGetManyParam<any>[]>(...tokens: Tokens): InjectorGetManySignature<Tokens> {
+    return tokens.map(({ token, notFoundValue }) => this.get(token, notFoundValue)) as InjectorGetManySignature<Tokens>;
+  }
 }
 
 /**
@@ -61,4 +64,33 @@ export abstract class Injector {
    * @suppress {duplicate}
    */
   abstract get(token: any, notFoundValue?: any): any;
+  /**
+   * Retrieves an instance from the injector based on the provided tokens.
+   * @param tokens See {@link InjectorGetManyParam}.
+   * @example
+   * ```ts
+   * const [car, engine, dashboard] = injector.getMany(
+   *   { token: Car },
+   *   { token: Engine },
+   *   { token: Dashboard, notFoundValue: null }
+   * );
+   * ```
+   */
+  abstract getMany<Tokens extends InjectorGetManyParam<any>[]>(...tokens: Tokens): InjectorGetManySignature<Tokens>;
 }
+
+export type InjectorGetManySignature<Tokens extends InjectorGetManyParam<any>[]> = {
+  [K in keyof Tokens]: Tokens[K] extends InjectorGetManyParam<infer U> ? U : never;
+};
+
+export type InjectorGetManyParam<T> = {
+  /** Retrieves an instance from the injector based on the provided token. */
+  token: Type<T> | InjectionToken<T>;
+  /**
+   * If not found:
+   * - Throws {@link NoProviderError} if no `notFoundValue` that is not equal to
+   * Injector.THROW_IF_NOT_FOUND is given
+   * - Returns the `notFoundValue` otherwise
+   */
+  notFoundValue?: T;
+};

@@ -366,6 +366,28 @@ describe(`injector`, () => {
     expect(glovebox instanceof Glovebox).toBe(true);
     expect(glovebox.manual instanceof GloveboxManual).toBe(true);
   });
+
+  it('should correctly get multiple providers', () => {
+    const injector = createInjector([Car, Engine, TurboEngine]);
+    const [car, engine, turboEngine] = injector.getMany({ token: Car }, { token: Engine }, { token: TurboEngine });
+
+    expect(car instanceof Car).toBe(true);
+    expect(engine instanceof Engine).toBe(true);
+    expect(turboEngine instanceof TurboEngine).toBe(true);
+  });
+
+  it('should use the default values with get multiple providers', () => {
+    const injector = createInjector([Engine]);
+    const [car, engine, turboEngine] = injector.getMany(
+      { token: Object, notFoundValue: 'car' },
+      { token: Engine },
+      { token: Object, notFoundValue: null }
+    );
+
+    expect(car).toBe('car');
+    expect(engine instanceof Engine).toBe(true);
+    expect(turboEngine).toBe(null);
+  });
 });
 
 describe('child', () => {

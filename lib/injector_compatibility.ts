@@ -1,7 +1,5 @@
-import { Type } from "./facade/type";
-import { InjectionToken } from "./injection_token";
-import { Injector } from "./injector";
-
+import { Injector } from './injector';
+import { ProviderToken } from './provider-token';
 
 /**
  * Current injector value used by `inject`.
@@ -14,21 +12,15 @@ export function getCurrentInjector(): Injector | undefined {
   return _currentInjector;
 }
 
-
-export function setCurrentInjector(
-  injector: Injector | undefined,
-): Injector | undefined {
+export function setCurrentInjector(injector: Injector | undefined): Injector | undefined {
   const former = _currentInjector;
   _currentInjector = injector;
   return former;
 }
 
-
-export function inject<T>(token: Type<T> | InjectionToken<T>): T {
+export function inject<T>(token: ProviderToken<T>): T {
   if (_currentInjector === undefined) {
-    throw new Error(
-      `inject() must be called from an injection context such as a constructor, a factory function, or a field initializer`,
-    );
+    throw new Error(`inject() must be called from an injection context such as a constructor, a factory function, or a field initializer`);
   } else {
     const value = _currentInjector.get(token);
     return value;

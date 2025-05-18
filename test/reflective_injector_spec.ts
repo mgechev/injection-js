@@ -9,7 +9,9 @@
 import 'reflect-metadata';
 
 import {
+  forwardRef,
   Inject,
+  inject,
   Injectable,
   InjectionToken,
   Injector,
@@ -18,14 +20,12 @@ import {
   ReflectiveInjector,
   ReflectiveKey,
   Self,
-  forwardRef,
-  inject,
 } from '../lib';
-import { ReflectiveInjector_ } from '../lib/reflective_injector';
-import { ResolvedReflectiveProvider_ } from '../lib/reflective_provider';
 import { getOriginalError } from '../lib/facade/errors';
 
 import { isPresent, stringify } from '../lib/facade/lang';
+import { ReflectiveInjector_ } from '../lib/reflective_injector';
+import { ResolvedReflectiveProvider_ } from '../lib/reflective_provider';
 
 class Engine {}
 
@@ -215,7 +215,7 @@ describe(`injector`, () => {
       { provide: Car, useClass: CarWithOptionalEngine, multi: true },
     ]);
 
-    const cars = injector.get(Car);
+    const cars = injector.get<Car[]>(Car);
     expect(cars.length).toEqual(2);
     expect(cars[0] instanceof SportsCar).toBeTruthy();
     expect(cars[1] instanceof CarWithOptionalEngine).toBeTruthy();
@@ -224,7 +224,7 @@ describe(`injector`, () => {
   it('should support multiProviders that are created using useExisting', () => {
     const injector = createInjector([Engine, SportsCar, { provide: Car, useExisting: SportsCar, multi: true }]);
 
-    const cars = injector.get(Car);
+    const cars = injector.get<Car[]>(Car);
     expect(cars.length).toEqual(1);
     expect(cars[0]).toBe(injector.get(SportsCar));
   });
@@ -265,7 +265,7 @@ describe(`injector`, () => {
     const injector = createInjector([CarWithOptionalEngine]);
 
     const car = injector.get(CarWithOptionalEngine);
-    expect(car.engine).toEqual(null);
+    expect<Engine | null>(car.engine).toEqual(null);
   });
 
   it('should flatten passed-in providers', () => {
@@ -366,6 +366,25 @@ describe(`injector`, () => {
     expect(glovebox instanceof Glovebox).toBe(true);
     expect(glovebox.manual instanceof GloveboxManual).toBe(true);
   });
+
+  it('should work with an abstract type as token', () => {
+    @Injectable()
+    abstract class SoundSystem {
+      constructor(@Inject('soundSystemVendor') readonly vendor: string) {}
+    }
+    @Injectable()
+    class SoundSystemImpl extends SoundSystem {}
+
+    const injector = createInjector([
+      {
+        provide: SoundSystem,
+        useClass: SoundSystemImpl,
+      },
+    ]);
+
+    const soundSystem = injector.get(SoundSystem);
+    expect(soundSystem).toBeInstanceOf(SoundSystemImpl);
+  });
 });
 
 describe('child', () => {
@@ -429,7 +448,7 @@ describe('instantiate', () => {
   });
 });
 
-describe('depedency resolution', () => {
+describe('dependency resolution', () => {
   describe('@Self()', () => {
     it('should return a dependency from self', () => {
       const inj = ReflectiveInjector.resolveAndCreate([

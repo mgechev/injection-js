@@ -60,6 +60,51 @@ describe('inject()', () => {
     expect(bar).toBeInstanceOf(Bar);
   });
 
+  it('should allow optional injection', () => {
+    class Foo {}
+
+    const { injector } = setup();
+
+    const foo = runInInjectionContext(injector, () => inject(Foo, { optional: true }));
+
+    expect(foo).toBeNull();
+  });
+
+  it('should support an abstract type as token', () => {
+    abstract class AbstractFoo {}
+    class Foo extends AbstractFoo {
+      readonly bar = inject(Bar);
+    }
+
+    const { injector } = setup([
+      {
+        provide: AbstractFoo,
+        useClass: Foo,
+      },
+    ]);
+
+    const foo = runInInjectionContext(injector, () => inject(AbstractFoo));
+
+    expect(foo).toBeDefined();
+    expect(foo).toBeInstanceOf(Foo);
+  });
+  it('should support multi providers', () => {
+    class Foo {}
+
+    const { injector } = setup([
+      {
+        provide: Foo,
+        useClass: Foo,
+        multi: true,
+      },
+    ]);
+
+    const foo = runInInjectionContext(injector, () => inject<Foo[]>(Foo));
+
+    expect(foo.length).toBeGreaterThanOrEqual(1);
+    foo.forEach((foo) => expect(foo).toBeInstanceOf(Foo));
+  });
+
   it('should throw outside an injection context', () => {
     expect(() => inject(Bar)).toThrowError();
   });

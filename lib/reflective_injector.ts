@@ -6,11 +6,11 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { Type } from './facade/type';
 import { Injector, THROW_IF_NOT_FOUND } from './injector';
 import { setCurrentInjector } from './injector_compatibility';
 import { Self, SkipSelf } from './metadata';
 import { Provider } from './provider';
+import { ProviderToken } from './provider-token';
 import { cyclicDependencyError, instantiationError, noProviderError, outOfBoundsError } from './reflective_errors';
 import { ReflectiveKey } from './reflective_key';
 import {
@@ -311,6 +311,8 @@ export class ReflectiveInjector_ implements ReflectiveInjector {
     }
   }
 
+  get<T>(token: ProviderToken<T>, notFoundValue?: T): T;
+  get<T>(token: ProviderToken<any>, notFoundValue?: T): T;
   get(token: any, notFoundValue: any = THROW_IF_NOT_FOUND): any {
     return this._getByKey(ReflectiveKey.get(token), null, notFoundValue);
   }

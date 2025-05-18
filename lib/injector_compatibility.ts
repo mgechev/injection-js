@@ -6,9 +6,8 @@
  * found in the LICENSE file at https://angular.dev/license
  */
 
-import { Type } from './facade/type';
-import { InjectionToken } from './injection_token';
-import { Injector } from './injector';
+import { Injector, THROW_IF_NOT_FOUND } from './injector';
+import { ProviderToken } from './provider-token';
 
 /**
  * Current injector value used by `inject`.
@@ -27,6 +26,14 @@ export function setCurrentInjector(injector: Injector | undefined): Injector | u
   return former;
 }
 
+export interface InjectOptions {
+  optional?: boolean;
+}
+
+export function inject<T>(token: ProviderToken<T>, options?: InjectOptions & { optional?: false }): T;
+export function inject<T = any>(token: ProviderToken, options?: InjectOptions & { optional?: false }): T;
+export function inject<T>(token: ProviderToken<T>, options?: InjectOptions & { optional?: true }): T | null;
+export function inject<T = any>(token: ProviderToken, options?: InjectOptions & { optional?: true }): T | null;
 /**
  * Injects a token from the currently active injector. `inject` is only supported in an injection
  * context. It can be used during:
@@ -36,6 +43,8 @@ export function setCurrentInjector(injector: Injector | undefined): Injector | u
  * - In a stack-frame of a function call in a DI context (e.g. {@link runInInjectionContext}).
  *
  * @param token A token that represents a dependency that should be injected.
+ * @param options Options to configure the inject procedure
+ * @param options.optional When set to `true`, the injector will not throw when nothing is found for the token
  * @returns the injected value if operation is successful, `null` otherwise.
  * @throws - if called outside a supported context.
  *
@@ -88,10 +97,11 @@ export function setCurrentInjector(injector: Injector | undefined): Injector | u
  * ```
  *
  */
-export function inject<T>(token: Type<T> | InjectionToken<T>): T {
+export function inject<T>(token: ProviderToken<T> | ProviderToken, options?: InjectOptions): T | null {
   assertInInjectionContext(inject);
 
-  return _currentInjector!.get(token);
+  const notFoundValue = !options?.optional ? <any>THROW_IF_NOT_FOUND : null;
+  return _currentInjector!.get<T>(token, notFoundValue);
 }
 
 /**

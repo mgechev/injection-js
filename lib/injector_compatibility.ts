@@ -9,6 +9,7 @@
 import { Type } from './facade/type';
 import { InjectionToken } from './injection_token';
 import { Injector } from './injector';
+import { ProviderToken } from './provider-token';
 
 /**
  * Current injector value used by `inject`.
@@ -88,7 +89,7 @@ export function setCurrentInjector(injector: Injector | undefined): Injector | u
  * ```
  *
  */
-export function inject<T>(token: Type<T> | InjectionToken<T>): T {
+export function inject<T>(token: ProviderToken<T>): T {
   assertInInjectionContext(inject);
 
   return _currentInjector!.get(token);

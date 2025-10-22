@@ -7,9 +7,7 @@
  */
 
 import { stringify } from './facade/lang';
-import { Type } from './facade/type';
-
-import { InjectionToken } from './injection_token';
+import { ProviderToken } from './provider-token';
 
 const _THROW_IF_NOT_FOUND = new Object();
 export const THROW_IF_NOT_FOUND = _THROW_IF_NOT_FOUND;
@@ -48,16 +46,12 @@ export abstract class Injector {
   static THROW_IF_NOT_FOUND = _THROW_IF_NOT_FOUND;
   static NULL: Injector = new _NullInjector();
 
+  abstract get<T>(token: ProviderToken, notFoundValue?: T): T;
+  abstract get<T>(token: ProviderToken<T>, notFoundValue?: T): T;
+  abstract get<T>(token: ProviderToken, notFoundValue?: T | null): T | null;
+  abstract get<T>(token: ProviderToken<T>, notFoundValue?: T | null): T | null;
   /**
-   * Retrieves an instance from the injector based on the provided token.
-   * If not found:
-   * - Throws {@link NoProviderError} if no `notFoundValue` that is not equal to
-   * Injector.THROW_IF_NOT_FOUND is given
-   * - Returns the `notFoundValue` otherwise
-   */
-  abstract get<T>(token: Type<T> | InjectionToken<T>, notFoundValue?: T): T;
-  /**
-   * @deprecated from v4.0.0 use Type<T> or InjectionToken<T>
+   * @deprecated use {@link ProviderToken} instead
    * @suppress {duplicate}
    */
   abstract get(token: any, notFoundValue?: any): any;
